@@ -21,15 +21,15 @@ body, html {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     /* 縦長のレイアウトに修正 */
     width: 56.25vh; /* 9:16 aspect ratio */
-    height: 100vh;
+    height: 100dvh;
     max-width: 100vw;
-    max-height: 100vh;
+    max-height: 100dvh;
 }
 
 /* --- プレイヤー --- */
 #player {
     position: absolute;
-    bottom: 15px;
+    bottom: 5vh;
     width: 80px;
     height: 80px;
     background-image: url('player.png');
