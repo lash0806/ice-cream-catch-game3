@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const sfxLevelEnd = document.getElementById('sfx-level-end');
     const sfxBonus = document.getElementById('sfx-bonus');
 
+    bgm.volume = 0.05;
+    [sfxCatch, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus].forEach(sfx => {
+        if (sfx) sfx.volume = 1.0;
+    });
+    if(sfxBomb) sfxBomb.volume = 1.0;
+
     // --- iOS系ブラウザでaudioアンロック ---
     function unlockAudio() {
         [bgm, sfxCatch, sfxBomb, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus].forEach(audio => {

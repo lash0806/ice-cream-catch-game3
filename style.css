@@ -268,12 +268,12 @@ button:hover {
 @media (max-width: 600px) {
     #game-container {
         width: 100vw;
-        height: 80vh;
+        height: 70vh;
         border: none;
         position: absolute;
         left: 0;
         right: 0;
-        bottom: 10vh;
+        bottom: 15vh;
         top: 0;
         margin: auto;
     }
@@ -296,7 +296,7 @@ button:hover {
     #player {
         width: 60px;
         height: 60px;
-        bottom: 10vh;
+        bottom: 15vh;
     }
 
     .item {
