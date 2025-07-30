@@ -23,13 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const sfxMst = document.getElementById('sfx-mst');
 
     bgm.volume = 0;
-    [sfxCatch, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus, sfxBomb].forEach(sfx => {
+    [sfxCatch, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus, sfxBomb, sfxMst].forEach(sfx => {
         if (sfx) sfx.volume = 1.0;
     });
 
     // --- iOS系ブラウザでaudioアンロック ---
     function unlockAudio() {
-        [bgm, sfxCatch, sfxBomb, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus].forEach(audio => {
+        [bgm, sfxCatch, sfxBomb, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus, sfxMst].forEach(audio => {
             if (audio) {
                 try {
                     audio.play().then(() => { audio.pause(); audio.currentTime = 0; }).catch(() => {});
