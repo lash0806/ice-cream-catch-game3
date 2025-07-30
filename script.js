@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sfxGoldenIce = document.getElementById('sfx-golden-ice');
     const sfxLevelEnd = document.getElementById('sfx-level-end');
     const sfxBonus = document.getElementById('sfx-bonus');
+    const sfxMst = document.getElementById('sfx-mst');
 
     bgm.volume = 0;
     [sfxCatch, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus, sfxBomb].forEach(sfx => {
@@ -91,8 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { type: 'bomb', score: -20, sfx: sfxBomb, soundName: 'bomb', probability: 0.10, image: 'Eggplant.png' }, /* 基本確率を下げ、動的に増やす */
         { type: 'hamster', powerup: true, sfx: sfxPowerup, soundName: 'powerup', probability: 0.04, image: 'hamster.png' },
         { type: 'bonus-card', score: 1000, sfx: sfxBonus, soundName: 'bonus', probability: 0, image: '' }, // imageは動的に設定
-        { type: 'monster-stun', score: -50, sfx: sfxBomb, soundName: 'bomb', probability: 0.10, image: 'mst-1.png', duration: 3000 }, // 3秒間スタン
-        { type: 'monster-invert', score: -50, sfx: sfxBomb, soundName: 'bomb', probability: 0.10, image: 'mst-2.png', duration: 5000 } // 5秒間左右反転
+        { type: 'monster-stun', score: -50, sfx: sfxMst, soundName: 'mst', probability: 0.10, image: 'mst-1.png', duration: 3000 }, // 3秒間スタン
+        { type: 'monster-invert', score: -50, sfx: sfxMst, soundName: 'mst', probability: 0.10, image: 'mst-2.png', duration: 5000 } // 5秒間左右反転
     ];
 
     // --- プレイヤーの移動 ---
