@@ -21,12 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const sfxLevelEnd = document.getElementById('sfx-level-end');
     const sfxBonus = document.getElementById('sfx-bonus');
 
-    bgm.volume = 0.2;
-    [sfxCatch, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus].forEach(sfx => {
-        if (sfx) sfx.volume = 0.7;
-    });
-    if(sfxBomb) sfxBomb.volume = 0.8;
-
+    // --- iOS系ブラウザでaudioアンロック ---
+    function unlockAudio() {
+        [bgm, sfxCatch, sfxBomb, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus].forEach(audio => {
+            if (audio) {
+                try {
+                    audio.play().then(() => { audio.pause(); audio.currentTime = 0; }).catch(() => {});
+                } catch (e) {}
+            }
+        });
+        window.removeEventListener('touchstart', unlockAudio, true);
+        window.removeEventListener('click', unlockAudio, true);
+    }
+    window.addEventListener('touchstart', unlockAudio, true);
+    window.addEventListener('click', unlockAudio, true);
 
     const startScreen = document.getElementById('start-screen');
     const levelEndScreen = document.getElementById('level-end-screen');
@@ -410,7 +418,12 @@ document.addEventListener('DOMContentLoaded', () => {
         timeGauge.style.width = '100%'; // ゲージをリセット
         gameSpeed = levels[level].baseSpeed;
         player.style.transform = 'scale(1)'; // プレイヤーのサイズをリセット
-        player.style.bottom = '15px'; // プレイヤーの位置をリセット
+        // スマホ・PCでプレイヤーの位置を動的に調整
+        if (window.innerWidth <= 600) {
+            player.style.bottom = '10vh';
+        } else {
+            player.style.bottom = '15px';
+        }
         powerupLevel = 0; // パワーアップレベルをリセット
         if (powerupTimer) clearTimeout(powerupTimer); // タイマーをリセット
         powerupEndTime = 0;
