@@ -29,7 +29,7 @@ body, html {
 /* --- プレイヤー --- */
 #player {
     position: absolute;
-    bottom: calc(5vh - 80px);
+    bottom: calc(5vh - 40px);
     width: 80px;
     height: 80px;
     background-image: url('player.png');
@@ -305,7 +305,7 @@ button:hover {
         height: 70px;
         left: 50%;
         transform: translateX(-50%);
-        bottom: calc(4vh - 70px);
+        bottom: calc(4vh - 35px);
         top: auto;
     }
 
