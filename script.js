@@ -426,9 +426,9 @@ document.addEventListener('DOMContentLoaded', () => {
         player.style.transform = 'scale(1)'; // プレイヤーのサイズをリセット
         // スマホ・PCでプレイヤーの位置を動的に調整
         if (window.innerWidth <= 600) {
-            player.style.bottom = '10vh';
+            player.style.bottom = 'calc(4vh - 70px)';
         } else {
-            player.style.bottom = '15px';
+            player.style.bottom = 'calc(5vh - 80px)';
         }
         powerupLevel = 0; // パワーアップレベルをリセット
         if (powerupTimer) clearTimeout(powerupTimer); // タイマーをリセット
