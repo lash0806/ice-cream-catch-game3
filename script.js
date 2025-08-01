@@ -18,11 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreDisplay = document.getElementById('score-display');
     const timeDisplay = document.getElementById('time-display');
     const timeGauge = document.getElementById('time-gauge');
-    const levelDisplay = document.getElementById('level-display');
+    // const levelDisplay = document.getElementById('level-display'); // 存在しないためコメントアウト
+const levelDisplay = { innerText: '' }; // ダミーオブジェクトでエラー回避
     const level1ScoreDisplay = document.getElementById('level1-score-display');
     const level2ScoreDisplay = document.getElementById('level2-score-display');
     const level3ScoreDisplay = document.getElementById('level3-score-display');
-    const totalScoreDisplay = document.getElementById('total-score-display');
+    // const totalScoreDisplay = document.getElementById('total-score-display'); // 存在しないためコメントアウト
+const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトでエラー回避
     
     // Audio elements
     const bgm = document.getElementById('bgm');
