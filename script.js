@@ -1,3 +1,16 @@
+// --- プレイヤー位置定数 ---
+const PLAYER_BOTTOM_PC = 'calc(5vh - 40px)';
+const PLAYER_BOTTOM_SMARTPHONE = 'calc(4vh - 35px)';
+
+// プレイヤー位置を一元的に設定する関数
+function setPlayerBottom() {
+    if (window.innerWidth <= 600) {
+        player.style.bottom = PLAYER_BOTTOM_SMARTPHONE;
+    } else {
+        player.style.bottom = PLAYER_BOTTOM_PC;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- DOM要素の取得 ---
     const gameContainer = document.getElementById('game-container');
@@ -425,11 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameSpeed = levels[level].baseSpeed;
         player.style.transform = 'scale(1)'; // プレイヤーのサイズをリセット
         // スマホ・PCでプレイヤーの位置を動的に調整
-        if (window.innerWidth <= 600) {
-            player.style.bottom = 'calc(4vh - 35px)';
-        } else {
-            player.style.bottom = 'calc(5vh - 40px)';
-        }
+        setPlayerBottom();
         powerupLevel = 0; // パワーアップレベルをリセット
         if (powerupTimer) clearTimeout(powerupTimer); // タイマーをリセット
         powerupEndTime = 0;

@@ -69,16 +69,112 @@ body, html {
     left: 10px;
     right: 10px;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
-    background: linear-gradient(145deg, rgba(135, 206, 250, 0.85), rgba(173, 216, 230, 0.85)); /* 淡いブルー系に変更 */
-    padding: 12px 15px;
+    align-items: flex-end;
+    background: linear-gradient(145deg, rgba(135, 206, 250, 0.85), rgba(173, 216, 230, 0.85));
+    padding: 14px 18px 18px 18px;
     border-radius: 20px;
-    color: #003366; /* 濃い青系の文字色に変更 */
-    font-size: 20px; /* 文字サイズを大きく */
+    color: #003366;
+    font-size: 20px;
     font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* 白いテキストシャドウで可読性向上 */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
     z-index: 20;
+    box-sizing: border-box;
+}
+
+.info-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 60px;
+}
+.time-label {
+    font-size: 1.1em;
+    margin-bottom: 2px;
+}
+.time-value {
+    font-size: 2.1em;
+    font-weight: bold;
+    color: #222;
+    line-height: 1;
+}
+
+.info-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+.score-label {
+    font-size: 1.1em;
+    margin-bottom: 2px;
+}
+.score-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #e53935;
+    background: #ffe4ec;
+    border: 3px solid #222;
+    border-radius: 8px;
+    padding: 2px 20px;
+    margin-bottom: 2px;
+    line-height: 1.1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.info-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 90px;
+}
+.level-score {
+    font-size: 1.1em;
+    margin-bottom: 2px;
+}
+
+#time-gauge-container {
+    width: 98%;
+    height: 14px;
+    background-color: rgba(0,0,0,0.07);
+    border: 2px solid #b2b2b2;
+    border-radius: 7px;
+    margin: 0 auto;
+    margin-top: 7px;
+    margin-bottom: 0;
+    position: absolute;
+    left: 1%;
+    right: 1%;
+    bottom: 6px;
+    z-index: 21;
+    box-sizing: border-box;
+}
+#time-gauge {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, #32CD32, #ADFF2F, #FFFF00, #FFA500, #FF4500);
+    border-radius: 4px;
+    transition: width 0.5s linear;
+}
+
+@media (max-width: 600px) {
+    #info-board {
+        font-size: 1.05em;
+        padding: 7px 5px 11px 5px;
+    }
+    .score-value {
+        font-size: 2em;
+        padding: 0 12px;
+    }
+    #time-gauge-container {
+        height: 10px;
+        border-width: 1.5px;
+        margin-top: 3px;
+        bottom: 2px;
+    }
+}
+
     border: 2px solid rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }

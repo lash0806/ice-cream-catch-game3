@@ -23,19 +23,21 @@
         <div id="player"></div>
         <div id="info-board">
             <div class="info-left">
-                <span>レベル: <span id="level-display">1</span></span>
-                <span class="time-container">タイム: <span id="time-display">60</span></span>
-                <span>スコア: <span id="score-display">0</span></span>
+                <div class="time-label">タイム</div>
+                <div class="time-value" id="time-display">59</div>
+            </div>
+            <div class="info-center">
+                <div class="score-label">スコア</div>
+                <div class="score-value" id="score-display">1,000</div>
             </div>
             <div class="info-right">
-                <span>レベル1: <span id="level1-score-display">0</span></span>
-                <span>レベル2: <span id="level2-score-display">0</span></span>
-                <span>レベル3: <span id="level3-score-display">0</span></span>
-                <span>合計: <span id="total-score-display">0</span></span>
+                <div class="level-score">レベル1: <span id="level1-score-display">0</span></div>
+                <div class="level-score">レベル2: <span id="level2-score-display">0</span></div>
+                <div class="level-score">レベル3: <span id="level3-score-display">0</span></div>
             </div>
-        </div>
-        <div id="time-gauge-container">
-            <div id="time-gauge"></div>
+            <div id="time-gauge-container">
+                <div id="time-gauge"></div>
+            </div>
         </div>
 
         <div id="start-screen" class="screen">
