@@ -37,7 +37,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
     const sfxBonus = document.getElementById('sfx-bonus');
     const sfxMst = document.getElementById('sfx-mst');
 
-    bgm.volume = 0;
+    bgm.volume = 1.0;
     [sfxCatch, sfxPowerup, sfxClock, sfxGoldenIce, sfxLevelEnd, sfxBonus, sfxBomb, sfxMst].forEach(sfx => {
         if (sfx) sfx.volume = 1.0;
     });
