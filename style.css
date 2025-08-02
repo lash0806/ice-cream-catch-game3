@@ -445,14 +445,14 @@ button:hover {
 
     #level-end-screen .screen-content,
     #game-over-screen .screen-content {
-        width: 88vw; /* スマホはほぼ画面幅いっぱいの横長長方形 */
+        width: 90vw;
         max-width: 96vw;
         min-width: 0;
         top: 35%;
         left: 50%;
-        padding: 8px 10vw 14px 10vw;
-        min-height: 44px;
-        border-radius: 16px;
+        padding: 16px 0 16px 0;
+        min-height: 60px;
+        border-radius: 20px;
     }
 
     #level-score, #final-score {
