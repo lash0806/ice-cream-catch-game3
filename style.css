@@ -327,20 +327,39 @@ button:hover {
 }
 
 /* --- レベルクリア画面のスタイル調整 --- */
-#level-end-screen .screen-content,
-#game-over-screen .screen-content {
+#level-end-screen .screen-content {
     border: 3px solid #22aeff;
-    padding: 10px 32px 18px 32px; /* 横長感を強調 */
+    padding: 10px 32px 18px 32px;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.55);
     position: absolute;
     top: 32%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70vw; /* 横長の長方形に */
+    width: 70vw;
     max-width: 520px;
     min-width: 240px;
     min-height: 60px;
+    box-shadow: 0 0 12px rgba(34,174,255,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#game-over-screen .screen-content {
+    border: 3px solid #22aeff;
+    padding: 8px 16px 10px 16px;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.55);
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56vw;
+    max-width: 340px;
+    min-width: 140px;
+    min-height: 44px;
     box-shadow: 0 0 12px rgba(34,174,255,0.12);
     display: flex;
     flex-direction: column;
