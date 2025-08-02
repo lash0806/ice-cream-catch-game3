@@ -330,14 +330,15 @@ button:hover {
 #level-end-screen .screen-content,
 #game-over-screen .screen-content {
     border: 3px solid #22aeff;
-    padding: 10px;
+    padding: 4px 6px 8px 6px; /* パディングを大幅縮小 */
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
-    top: 30%; /* さらに上に移動 */
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%; /* さらに小さく */
+    width: 44%; /* 横幅もさらに小さく */
+    min-height: 56px; /* 最低限の高さだけ確保 */
 }
 
 #level-score, #final-score {
@@ -418,8 +419,10 @@ button:hover {
 
     #level-end-screen .screen-content,
     #game-over-screen .screen-content {
-        width: 60%; /* さらに小さく（スマホ） */
-        top: 35%; /* さらに上に移動（スマホ） */
+        width: 48%; /* スマホでも横幅をさらに小さく */
+        top: 35%;
+        padding: 2px 4px 6px 4px; /* スマホ時はパディングもさらに小さく */
+        min-height: 44px;
     }
 
     #level-score, #final-score {
