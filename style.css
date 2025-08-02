@@ -334,7 +334,7 @@ button:hover {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
-    top: 40%; /* 上に移動 */
+    top: 30%; /* さらに上に移動 */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%; /* 幅を小さく */
@@ -419,7 +419,7 @@ button:hover {
     #level-end-screen .screen-content,
     #game-over-screen .screen-content {
         width: 85%;
-        top: 48%;
+        top: 35%; /* さらに上に移動（スマホ） */
     }
 
     #level-score, #final-score {
