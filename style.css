@@ -330,15 +330,22 @@ button:hover {
 #level-end-screen .screen-content,
 #game-over-screen .screen-content {
     border: 3px solid #22aeff;
-    padding: 4px 6px 8px 6px; /* パディングを大幅縮小 */
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 32px 18px 32px; /* 横長感を強調 */
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.55);
     position: absolute;
-    top: 30%;
+    top: 32%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 44%; /* 横幅もさらに小さく */
-    min-height: 56px; /* 最低限の高さだけ確保 */
+    width: 70vw; /* 横長の長方形に */
+    max-width: 520px;
+    min-width: 240px;
+    min-height: 60px;
+    box-shadow: 0 0 12px rgba(34,174,255,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 #level-score, #final-score {
@@ -419,10 +426,14 @@ button:hover {
 
     #level-end-screen .screen-content,
     #game-over-screen .screen-content {
-        width: 48%; /* スマホでも横幅をさらに小さく */
+        width: 88vw; /* スマホはほぼ画面幅いっぱいの横長長方形 */
+        max-width: 96vw;
+        min-width: 0;
         top: 35%;
-        padding: 2px 4px 6px 4px; /* スマホ時はパディングもさらに小さく */
+        left: 50%;
+        padding: 8px 10vw 14px 10vw;
         min-height: 44px;
+        border-radius: 16px;
     }
 
     #level-score, #final-score {
