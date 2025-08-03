@@ -299,66 +299,52 @@ button:hover {
     100% { opacity: 0; }
 }
 
-/* --- レベルクリア画面のスタイル調整 --- */
-#level-end-screen .screen-content {
-    border: 3px solid #22aeff;
-    padding: 0 32px;
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.55);
+/* --- レベルクリア画面のスタイル調整 (画像ベース) --- */
+.score-panel {
     position: absolute;
-    top: 32%;
+    top: 38%; /* 位置を微調整 */
     left: 50%;
     transform: translate(-50%, -50%);
+    background-color: rgba(68, 68, 68, 0.95); /* 半透明の濃いグレー */
+    color: white;
+    padding: 20px 30px;
+    border-radius: 30px; /* 角丸 */
+    text-align: center;
     width: 70vw;
-    max-width: 520px;
-    min-width: 240px;
-    min-height: 60px;
-    box-shadow: 0 0 12px rgba(34,174,255,0.12);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    max-width: 360px;
+    min-width: 260px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    border: 2px solid #888;
 }
 
-#game-over-screen .screen-content {
-    border: 3px solid #22aeff;
-    padding: 8px 0 8px 0; /* 上下をさらに狭く */
-    border-radius: 20px; /* 角丸長方形 */
-    background-color: rgba(0, 0, 0, 0.65);
-    position: absolute;
-    top: 29%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 90vw; /* 画面幅の90%で見切れ防止 */
-    max-width: 400px;
-    min-width: 180px;
-    min-height: 60px;
-    box-shadow: 0 0 16px rgba(34,174,255,0.18);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.score-panel p {
+    font-size: 2.5rem; /* スコア文字サイズ */
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 18px; /* ボタンとの余白 */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-#level-score, #final-score {
-    font-size: 2.5rem;
-    color: white;
-    margin-bottom: 20px;
+.score-panel p span {
+    font-family: 'Arial', sans-serif; /* 数字を見やすく */
 }
 
-#next-level-button, #restart-button {
-    font-size: 1.5rem;
-    color: white;
+#level-end-screen #next-level-button {
     background-color: #22aeff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border: 2px solid white;
+    padding: 10px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: background-color 0.2s;
 }
 
-#next-level-button:hover, #restart-button:hover {
-    background-color: #1a8cd8;
+#level-end-screen #next-level-button:hover {
+    background-color: #0088dd;
 }
-
 
 /* --- メディアクエリ --- */
 @media (max-width: 600px) {
