@@ -73,7 +73,7 @@ body, html {
     justify-content: space-between;
     align-items: flex-end;
     background: linear-gradient(145deg, rgba(135, 206, 250, 0.85), rgba(173, 216, 230, 0.85));
-    padding: 14px 18px 18px 18px;
+    padding: 8px 18px 12px 18px;
     border-radius: 20px;
     color: #003366;
     font-size: 20px;
