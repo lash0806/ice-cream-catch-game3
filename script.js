@@ -24,6 +24,7 @@ const levelDisplay = { innerText: '' }; // ダミーオブジェクトでエラ�
     const level2ScoreDisplay = document.getElementById('level2-score-display');
     const level3ScoreDisplay = document.getElementById('level3-score-display');
     // const totalScoreDisplay = document.getElementById('total-score-display'); // 存在しないためコメントアウト
+    const finalScoreText = document.getElementById('final-score-text');
 const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトでエラー回避
     
     // Audio elements
@@ -493,7 +494,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             levelEndScreen.style.backgroundImage = `url('level-${level}.jpg')`;
             levelEndScreen.style.display = 'flex';
         } else {
-            finalScoreDisplay.innerText = totalScore;
+            finalScoreText.innerText = `合計スコア : ${totalScore}点`;
             gameOverScreen.style.backgroundImage = `url('final result.jpg')`;
             gameOverScreen.style.display = 'flex';
         }
