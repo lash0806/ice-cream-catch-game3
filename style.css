@@ -73,7 +73,7 @@ body, html {
     justify-content: space-between;
     align-items: flex-end;
     background: linear-gradient(145deg, rgba(135, 206, 250, 0.85), rgba(173, 216, 230, 0.85));
-    padding: 8px 18px 12px 18px;
+    padding: 14px 18px 18px 18px;
     border-radius: 20px;
     color: #003366;
     font-size: 20px;
@@ -175,34 +175,7 @@ body, html {
     }
 }
 
-    border: 2px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-}
 
-.info-left,
-.info-right {
-    display: flex;
-    flex-direction: column;
-}
-
-.info-right {
-    align-items: flex-end;
-}
-
-/* スコアの色を濃い色に変更 */
-.info-right span:nth-child(1) {
-    color: #005A9C; /* 濃い青 */
-}
-.info-right span:nth-child(2) {
-    color: #2E8B57; /* シーグリーン */
-}
-.info-right span:nth-child(3) {
-    color: #C71585; /* ミディアムバイオレットレッド */
-}
-.info-right span:nth-child(4) {
-    color: #FF8C00; /* ダークオレンジ */
-    font-weight: bold;
-}
 
 #info-board span {
     margin-bottom: 5px;
@@ -329,7 +302,7 @@ button:hover {
 /* --- レベルクリア画面のスタイル調整 --- */
 #level-end-screen .screen-content {
     border: 3px solid #22aeff;
-    padding: 10px 32px 18px 32px;
+    padding: 0 32px;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.55);
     position: absolute;
