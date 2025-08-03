@@ -106,7 +106,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
         { type: 'golden-ice', emoji: '🌟', score: 50, sfx: sfxGoldenIce, soundName: 'golden', probability: 0.08 },
         { type: 'clock', emoji: '⏰', time: 5, sfx: sfxClock, soundName: 'clock', probability: 0.08 },
         { type: 'bomb', score: -20, sfx: sfxBomb, soundName: 'bomb', probability: 0.10, image: 'Eggplant.png' }, /* 基本確率を下げ、動的に増やす */
-        { type: 'hamster', powerup: true, sfx: sfxPowerup, soundName: 'powerup', probability: 0.04, image: 'hamster.png' },
+        { type: 'hamster', powerup: true, score: 100, sfx: sfxPowerup, soundName: 'powerup', probability: 0.04, image: 'hamster.png' },
         { type: 'bonus-card', score: 1000, sfx: sfxBonus, soundName: 'bonus', probability: 0, image: '' }, // imageは動的に設定
         { type: 'monster-stun', score: -50, sfx: sfxMst, soundName: 'mst', probability: 0.10, image: 'mst-1.png', duration: 3000 }, // 3秒間スタン
         { type: 'monster-invert', score: -50, sfx: sfxMst, soundName: 'mst', probability: 0.10, image: 'mst-2.png', duration: 5000 } // 5秒間左右反転
