@@ -576,15 +576,15 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             console.log('送信データ:', { nickname, totalScore });
             console.log('送信先URL:', RANKING_API_URL);
             
-            const response = await fetch(RANKING_API_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    nickname: nickname,
-                    score: totalScore
-                })
+            // GETリクエストでパラメータを送信
+            const params = new URLSearchParams({
+                action: 'submit',
+                nickname: nickname,
+                score: totalScore
+            });
+            
+            const response = await fetch(`${RANKING_API_URL}?${params}`, {
+                method: 'GET'
             });
             
             console.log('レスポンス状態:', response.status, response.statusText);

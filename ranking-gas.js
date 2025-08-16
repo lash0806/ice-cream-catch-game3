@@ -3,6 +3,29 @@
 const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'; // スプレッドシートのIDに置き換えてください
 const SHEET_NAME = 'ランキング'; // シート名
 
+// CORS対応のヘルパー関数
+function createCORSResponse(data) {
+  return ContentService
+    .createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+}
+
+// OPTIONSリクエスト（プリフライト）への対応
+function doOptions(e) {
+  return ContentService
+    .createTextOutput('')
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+}
+
 // ランキングデータを受信（スコア送信）
 function doPost(e) {
   try {
@@ -11,16 +34,12 @@ function doPost(e) {
     
     // バリデーション
     if (!nickname || score === undefined) {
-      return ContentService
-        .createTextOutput(JSON.stringify({ success: false, error: 'ニックネームとスコアが必要です' }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return createCORSResponse({ success: false, error: 'ニックネームとスコアが必要です' });
     }
     
     // ニックネームの長さチェック（10文字まで）
     if (nickname.length > 10) {
-      return ContentService
-        .createTextOutput(JSON.stringify({ success: false, error: 'ニックネームは10文字以内で入力してください' }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return createCORSResponse({ success: false, error: 'ニックネームは10文字以内で入力してください' });
     }
     
     // スプレッドシートを開く
@@ -29,14 +48,10 @@ function doPost(e) {
     // 新しい行を追加
     sheet.appendRow([nickname, parseInt(score)]);
     
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: true, message: 'スコアが正常に登録されました' }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createCORSResponse({ success: true, message: 'スコアが正常に登録されました' });
       
   } catch (error) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createCORSResponse({ success: false, error: error.toString() });
   }
 }
 
@@ -58,14 +73,10 @@ function doGet(e) {
     // TOP10を取得
     const top10 = rankings.slice(0, 10);
     
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: true, rankings: top10 }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createCORSResponse({ success: true, rankings: top10 });
       
   } catch (error) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return createCORSResponse({ success: false, error: error.toString() });
   }
 }
 
