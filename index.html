@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>アイスクリームキャッチゲーム</title>
+    <title>ソヨンちゃん・アイスクリームキャッチ！ゲーム</title>
+    <!-- OGP基本タグ -->
+    <meta property="og:title" content="ソヨンちゃん・アイスクリームキャッチ！ゲーム" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.seoyeon-chan.com/ice-cream-catch/" />
+    <meta property="og:image" content="https://www.seoyeon-chan.com/ice-cream-catch/ogp.jpg" />
+    <meta property="og:description" content="ソヨンちゃんと一緒にアイスやレアアイテムをキャッチして高得点を目指そう！スマホ・PC対応のブラウザゲームです。" />
+    <meta property="og:site_name" content="ソヨンちゃん・アイスクリームキャッチ！ゲーム" />
+    <!-- X（旧Twitter）用 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ソヨンちゃん・アイスクリームキャッチ！ゲーム" />
+    <meta name="twitter:description" content="ソヨンちゃんと一緒にアイスやレアアイテムをキャッチして高得点を目指そう！スマホ・PC対応のブラウザゲームです。" />
+    <meta name="twitter:image" content="https://www.seoyeon-chan.com/ice-cream-catch/ogp.jpg" />
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
 </head>
@@ -40,9 +52,11 @@
             </div>
         </div>
 
+
         <div id="start-screen" class="screen">
             <div class="screen-content">
                 <button id="start-button">START！</button>
+                <button id="ranking-button-start" style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">ランキングを見る</button>
             </div>
         </div>
 
@@ -50,15 +64,38 @@
             <div class="score-panel">
                 <p>スコア: <span id="level-score">0</span></p>
                 <button id="next-level-button">次のレベルへ</button>
+                <button id="ranking-button-level" style="margin-top: 15px; padding: 10px 20px; font-size: 16px;">ランキングを見る</button>
             </div>
         </div>
 
         <div id="game-over-screen" class="screen" style="display: none;">
     <div class="score-panel">
         <p id="final-score-text">合計スコア : 0点</p>
+        
+        <!-- ランキング登録セクション -->
+        <div id="ranking-section" style="margin: 20px 0;">
+            <h3>ランキングに登録</h3>
+            <div class="ranking-form">
+                <input type="text" id="nickname-input" placeholder="ニックネーム（10文字まで）" maxlength="10" style="margin: 10px; padding: 8px; font-size: 16px;">
+                <button id="submit-score-button" style="margin: 10px; padding: 10px 20px; font-size: 16px;">スコアを登録</button>
+                <div id="ranking-message" style="margin-top: 10px; color: #666;"></div>
+            </div>
+        </div>
+        
+        <!-- ランキング表示ボタン -->
+        <button id="show-ranking-button" style="margin: 10px; padding: 10px 20px; font-size: 16px;">ランキングを見る</button>
         <button id="restart-button">もう一度プレイ</button>
     </div>
 </div>
+
+        <!-- ランキング表示画面 -->
+        <div id="ranking-screen" class="screen" style="display: none; background: rgba(0,0,0,0.9); z-index: 2000;">
+            <div class="ranking-panel" style="background: rgba(255,255,255,0.95); border-radius: 15px; padding: 30px; max-width: 450px; max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <h2 style="color: #333; margin-bottom: 20px; text-align: center;">🏆 ランキング TOP10 🏆</h2>
+                <div id="ranking-list" style="margin: 20px 0; text-align: left;"></div>
+                <button id="close-ranking-button" style="margin: 15px auto 0; padding: 12px 25px; font-size: 16px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; display: block;">閉じる</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

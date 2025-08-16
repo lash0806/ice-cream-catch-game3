@@ -61,6 +61,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
     const startScreen = document.getElementById('start-screen');
     const levelEndScreen = document.getElementById('level-end-screen');
     const gameOverScreen = document.getElementById('game-over-screen');
+    const rankingScreen = document.getElementById('ranking-screen');
 
     // 開始画面の背景を設定
     startScreen.style.backgroundImage = "url('start.jpg')";
@@ -68,6 +69,16 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
     const startButton = document.getElementById('start-button');
     const nextLevelButton = document.getElementById('next-level-button');
     const restartButton = document.getElementById('restart-button');
+    const submitScoreButton = document.getElementById('submit-score-button');
+    const showRankingButton = document.getElementById('show-ranking-button');
+    const closeRankingButton = document.getElementById('close-ranking-button');
+    const nicknameInput = document.getElementById('nickname-input');
+    const rankingMessage = document.getElementById('ranking-message');
+    const rankingList = document.getElementById('ranking-list');
+    
+    // 新しいランキングボタン
+    const rankingButtonStart = document.getElementById('ranking-button-start');
+    const rankingButtonLevel = document.getElementById('ranking-button-level');
 
     const levelEndTitle = document.getElementById('level-end-title');
     const levelScoreDisplay = document.getElementById('level-score');
@@ -91,6 +102,9 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
     let isInverted = false;
     let stunTimer = null;
     let invertTimer = null;
+
+    // ランキング設定 - 実際のGoogle Apps ScriptのURLに置き換えてください
+    const RANKING_API_URL = 'https://script.google.com/macros/s/AKfycbw3oRDp_3DuQaMhXoEQQsaD9spsjFZj2Peg8iSyRo8xG4rhGrOEBM_dFiwJlOl0kupC/exec';
 
     // --- レベル設定 ---
     const levels = {
@@ -495,7 +509,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             levelEndScreen.style.display = 'flex';
         } else {
             finalScoreText.innerText = `合計スコア : ${totalScore}点`;
-            gameOverScreen.style.backgroundImage = `url('final result.jpg')`;
+            gameOverScreen.style.backgroundImage = `url('final-result.jpg')`;
             gameOverScreen.style.display = 'flex';
         }
 
@@ -541,4 +555,134 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
         level3ScoreDisplay.innerText = 0;
         totalScoreDisplay.innerText = 0;
     });
+
+    // --- ランキング機能 ---
+    
+    // スコア送信
+    submitScoreButton.addEventListener('click', async () => {
+        const nickname = nicknameInput.value.trim();
+        
+        if (!nickname) {
+            rankingMessage.textContent = 'ニックネームを入力してください';
+            rankingMessage.style.color = 'red';
+            return;
+        }
+        
+        submitScoreButton.disabled = true;
+        submitScoreButton.textContent = '送信中...';
+        rankingMessage.textContent = '';
+        
+        try {
+            console.log('送信データ:', { nickname, totalScore });
+            console.log('送信先URL:', RANKING_API_URL);
+            
+            const response = await fetch(RANKING_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nickname: nickname,
+                    score: totalScore
+                })
+            });
+            
+            console.log('レスポンス状態:', response.status, response.statusText);
+            const result = await response.json();
+            console.log('レスポンス結果:', result);
+            
+            if (result.success) {
+                rankingMessage.textContent = 'スコアが登録されました！';
+                rankingMessage.style.color = 'green';
+                nicknameInput.value = '';
+                submitScoreButton.style.display = 'none';
+                nicknameInput.style.display = 'none';
+                document.querySelector('#ranking-section h3').style.display = 'none';
+            } else {
+                rankingMessage.textContent = result.error || '登録に失敗しました';
+                rankingMessage.style.color = 'red';
+            }
+        } catch (error) {
+            console.error('通信エラー詳細:', error);
+            rankingMessage.textContent = `通信エラー: ${error.message}`;
+            rankingMessage.style.color = 'red';
+        }
+        
+        submitScoreButton.disabled = false;
+        submitScoreButton.textContent = 'スコアを登録';
+    });
+    
+    // ランキング表示関数（共通）
+    async function showRanking(button) {
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = '読み込み中...';
+        
+        try {
+            const response = await fetch(RANKING_API_URL);
+            const result = await response.json();
+            
+            if (result.success) {
+                displayRanking(result.rankings);
+                rankingScreen.style.display = 'flex';
+            } else {
+                alert('ランキングの取得に失敗しました');
+            }
+        } catch (error) {
+            alert('通信エラーが発生しました');
+        }
+        
+        button.disabled = false;
+        button.textContent = originalText;
+    }
+
+    // 各ランキングボタンのイベントリスナー
+    showRankingButton.addEventListener('click', () => showRanking(showRankingButton));
+    rankingButtonStart.addEventListener('click', () => showRanking(rankingButtonStart));
+    rankingButtonLevel.addEventListener('click', () => showRanking(rankingButtonLevel));
+    
+    // ランキング画面を閉じる
+    closeRankingButton.addEventListener('click', () => {
+        rankingScreen.style.display = 'none';
+    });
+    
+    // ランキング表示用関数
+    function displayRanking(rankings) {
+        rankingList.innerHTML = '';
+        
+        if (rankings.length === 0) {
+            rankingList.innerHTML = '<p>まだランキングデータがありません</p>';
+            return;
+        }
+        
+        rankings.forEach((entry, index) => {
+            const rankDiv = document.createElement('div');
+            rankDiv.style.cssText = 'margin: 8px 0; padding: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #007bff;';
+            
+            let rankText = '';
+            let rankColor = '#333';
+            if (index === 0) {
+                rankText = '🥇';
+                rankColor = '#FFD700';
+                rankDiv.style.borderLeftColor = '#FFD700';
+            } else if (index === 1) {
+                rankText = '🥈';
+                rankColor = '#C0C0C0';
+                rankDiv.style.borderLeftColor = '#C0C0C0';
+            } else if (index === 2) {
+                rankText = '🥉';
+                rankColor = '#CD7F32';
+                rankDiv.style.borderLeftColor = '#CD7F32';
+            } else {
+                rankText = `${index + 1}位`;
+            }
+            
+            rankDiv.innerHTML = `
+                <span style="font-weight: bold; color: ${rankColor}; font-size: 16px;">${rankText} ${entry.nickname}</span>
+                <span style="font-weight: bold; color: #333; font-size: 16px;">${entry.score.toLocaleString()}点</span>
+            `;
+            
+            rankingList.appendChild(rankDiv);
+        });
+    }
 });
