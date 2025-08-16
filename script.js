@@ -576,19 +576,34 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             console.log('送信データ:', { nickname, totalScore });
             console.log('送信先URL:', RANKING_API_URL);
             
-            // GETリクエストでパラメータを送信
-            const params = new URLSearchParams({
-                action: 'submit',
-                nickname: nickname,
-                score: totalScore
-            });
+            // スクリプトタグを使った通信（CORS回避）
+            const submitData = (nickname, score) => {
+                return new Promise((resolve, reject) => {
+                    const callbackName = 'submitCallback_' + Date.now();
+                    window[callbackName] = function(result) {
+                        resolve(result);
+                        delete window[callbackName];
+                        document.head.removeChild(script);
+                    };
+                    
+                    const script = document.createElement('script');
+                    const params = new URLSearchParams({
+                        action: 'submit',
+                        nickname: nickname,
+                        score: score,
+                        callback: callbackName
+                    });
+                    script.src = `${RANKING_API_URL}?${params}`;
+                    script.onerror = () => {
+                        reject(new Error('通信に失敗しました'));
+                        delete window[callbackName];
+                        document.head.removeChild(script);
+                    };
+                    document.head.appendChild(script);
+                });
+            };
             
-            const response = await fetch(`${RANKING_API_URL}?${params}`, {
-                method: 'GET'
-            });
-            
-            console.log('レスポンス状態:', response.status, response.statusText);
-            const result = await response.json();
+            const result = await submitData(nickname, totalScore);
             console.log('レスポンス結果:', result);
             
             if (result.success) {
@@ -619,8 +634,28 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
         button.textContent = '読み込み中...';
         
         try {
-            const response = await fetch(RANKING_API_URL);
-            const result = await response.json();
+            // スクリプトタグを使った通信（CORS回避）
+            const fetchRanking = () => {
+                return new Promise((resolve, reject) => {
+                    const callbackName = 'rankingCallback_' + Date.now();
+                    window[callbackName] = function(result) {
+                        resolve(result);
+                        delete window[callbackName];
+                        document.head.removeChild(script);
+                    };
+                    
+                    const script = document.createElement('script');
+                    script.src = `${RANKING_API_URL}?callback=${callbackName}`;
+                    script.onerror = () => {
+                        reject(new Error('通信に失敗しました'));
+                        delete window[callbackName];
+                        document.head.removeChild(script);
+                    };
+                    document.head.appendChild(script);
+                });
+            };
+            
+            const result = await fetchRanking();
             
             if (result.success) {
                 displayRanking(result.rankings);
