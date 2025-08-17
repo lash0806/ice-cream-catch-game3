@@ -685,7 +685,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             const result = await fetchRanking();
             
             if (result.success) {
-                displayRanking(result.rankings);
+                displayRanking(result.rankings, result.lastUpdated);
                 rankingScreen.style.display = 'flex';
             } else {
                 alert('ランキングの取得に失敗しました');
@@ -709,11 +709,21 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
     });
     
     // ランキング表示用関数
-    function displayRanking(rankings) {
+    function displayRanking(rankings, lastUpdated) {
         rankingList.innerHTML = '';
         
+        // 更新日時を表示
+        if (lastUpdated) {
+            const timestampDiv = document.createElement('div');
+            timestampDiv.style.cssText = 'text-align: center; font-size: 14px; color: #666; margin-bottom: 15px; font-style: italic;';
+            timestampDiv.textContent = lastUpdated;
+            rankingList.appendChild(timestampDiv);
+        }
+        
         if (rankings.length === 0) {
-            rankingList.innerHTML = '<p>まだランキングデータがありません</p>';
+            const noDataDiv = document.createElement('p');
+            noDataDiv.textContent = 'まだランキングデータがありません';
+            rankingList.appendChild(noDataDiv);
             return;
         }
         
@@ -725,8 +735,8 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             let rankColor = '#333';
             if (index === 0) {
                 rankText = '🥇';
-                rankColor = '#FFD700';
-                rankDiv.style.borderLeftColor = '#FFD700';
+                rankColor = '#DAA520';
+                rankDiv.style.borderLeftColor = '#DAA520';
             } else if (index === 1) {
                 rankText = '🥈';
                 rankColor = '#C0C0C0';

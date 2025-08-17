@@ -47,7 +47,13 @@ function doGet(e) {
       // TOP10を取得
       const top10 = rankings.slice(0, 10);
       
-      const result = { success: true, rankings: top10 };
+      // 現在の日時を取得（日本時間）
+      const now = new Date();
+      const jstOffset = 9 * 60; // JST is UTC+9
+      const jstTime = new Date(now.getTime() + (jstOffset * 60 * 1000));
+      const lastUpdated = Utilities.formatDate(jstTime, 'Asia/Tokyo', 'yyyy年M月d日 HH:mm更新');
+      
+      const result = { success: true, rankings: top10, lastUpdated: lastUpdated };
       return createJSONPResponse(result, callback);
     }
     
