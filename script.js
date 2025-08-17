@@ -751,8 +751,8 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             }
             
             rankDiv.innerHTML = `
-                <span style="font-weight: bold; color: ${rankColor}; font-size: 16px; margin-right: 1em;">${rankText} ${entry.nickname}</span>
-                <span style="font-weight: bold; color: #333; font-size: 16px;">${entry.score.toLocaleString()}点</span>
+                <span style="font-weight: bold; color: ${rankColor}; font-size: 14px; margin-right: 1em;">${rankText} ${entry.nickname}</span>
+                <span style="font-weight: bold; color: #333; font-size: 14px;">${entry.score.toLocaleString()}点</span>
             `;
             
             rankingList.appendChild(rankDiv);
