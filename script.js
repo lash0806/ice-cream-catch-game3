@@ -747,11 +747,11 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
                 rankDiv.style.borderLeftColor = '#CD7F32';
             } else {
                 rankText = `${index + 1}位`;
-                rankColor = '#0056b3'; // 4位以降は濃いブルー
+                rankColor = '#333'; // 4位以降は黒
             }
             
             rankDiv.innerHTML = `
-                <span style="font-weight: bold; color: ${rankColor}; font-size: 16px;">${rankText} ${entry.nickname}</span>
+                <span style="font-weight: bold; color: ${rankColor}; font-size: 16px; margin-right: 1em;">${rankText} ${entry.nickname}</span>
                 <span style="font-weight: bold; color: #333; font-size: 16px;">${entry.score.toLocaleString()}点</span>
             `;
             
