@@ -747,6 +747,7 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
                 rankDiv.style.borderLeftColor = '#CD7F32';
             } else {
                 rankText = `${index + 1}位`;
+                rankColor = '#007bff'; // 4位以降はブルー
             }
             
             rankDiv.innerHTML = `
