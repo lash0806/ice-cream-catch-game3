@@ -510,6 +510,11 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
         } else {
             finalScoreText.innerText = `合計スコア : ${totalScore}点`;
             gameOverScreen.style.backgroundImage = `url('final-result.jpg')`;
+            
+            // ゲームオーバー画面表示時にランキングメッセージをクリア
+            rankingMessage.textContent = '';
+            rankingMessage.style.color = '';
+            
             gameOverScreen.style.display = 'flex';
         }
 
@@ -545,6 +550,16 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
         const gameOverTitle = document.getElementById('game-over-title');
         if(gameOverTitle) gameOverTitle.innerText = 'ゲームオーバー';
         gameOverScreen.style.backgroundImage = '';
+
+        // スコア送信UI要素のリセット
+        submitScoreButton.style.display = '';
+        nicknameInput.style.display = '';
+        document.querySelector('#ranking-section h3').style.display = '';
+        rankingMessage.textContent = '';
+        rankingMessage.style.color = '';
+        nicknameInput.value = '';
+        submitScoreButton.disabled = false;
+        submitScoreButton.textContent = 'スコアを登録';
 
         playMusicForLevel(level);
         startLevel();
@@ -605,10 +620,22 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
             
             const result = await submitData(nickname, totalScore);
             console.log('レスポンス結果:', result);
+            console.log('result.message:', result.message);
+            console.log('result.success:', result.success);
+            console.log('typeof result.success:', typeof result.success);
+            console.log('result.success === true:', result.success === true);
             
             if (result.success) {
-                rankingMessage.textContent = 'スコアが登録されました！';
-                rankingMessage.style.color = 'green';
+                console.log('Setting message to:', result.message);
+                rankingMessage.textContent = result.message;
+                // メッセージの内容により色を変更
+                if (result.message.includes('更新されませんでした')) {
+                    rankingMessage.style.color = 'orange';
+                    console.log('Setting color to orange');
+                } else {
+                    rankingMessage.style.color = 'green';
+                    console.log('Setting color to green');
+                }
                 nicknameInput.value = '';
                 submitScoreButton.style.display = 'none';
                 nicknameInput.style.display = 'none';

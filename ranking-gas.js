@@ -1,6 +1,6 @@
 // Google Apps Script用ランキングAPIコード
 // Google スプレッドシートのURLまたはIDを設定してください
-const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'; // スプレッドシートのIDに置き換えてください
+const SPREADSHEET_ID = '14_dEFO_IJ0QL3-ELuw1ZuLorNJGrRGnE619pKOD2NBg'; // スプレッドシートのIDに置き換えてください
 const SHEET_NAME = 'ランキング'; // シート名
 
 // CORS対応のヘルパー関数
@@ -42,17 +42,37 @@ function doPost(e) {
       return createCORSResponse({ success: false, error: 'ニックネームは10文字以内で入力してください' });
     }
     
-    // スプレッドシートを開く
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
+    // submitScore関数を呼び出し
+    const result = submitScore(nickname, parseInt(score));
     
-    // 新しい行を追加
-    sheet.appendRow([nickname, parseInt(score)]);
-    
-    return createCORSResponse({ success: true, message: 'スコアが正常に登録されました' });
+    return createCORSResponse({ success: true, message: result.message });
       
   } catch (error) {
     return createCORSResponse({ success: false, error: error.toString() });
   }
+}
+
+// スコア送信・更新処理
+function submitScore(nickname, score) {
+  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
+  const data = sheet.getDataRange().getValues();
+
+  let updated = false;
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0] === nickname) {
+      if (score > data[i][1]) {
+        sheet.getRange(i + 1, 2).setValue(score); // スコア更新
+        updated = true;
+        return { message: "スコアを更新しました！" };
+      } else {
+        return { message: "前回より低いため更新されませんでした。" };
+      }
+    }
+  }
+
+  // 新規ユーザーなら追加
+  sheet.appendRow([nickname, score]);
+  return { message: "スコアが登録されました！" };
 }
 
 // ランキングデータを取得
