@@ -739,8 +739,8 @@ const totalScoreDisplay = { innerText: '' }; // ダミーオブジェクトで�
                 rankDiv.style.borderLeftColor = '#DAA520';
             } else if (index === 1) {
                 rankText = '🥈';
-                rankColor = '#C0C0C0';
-                rankDiv.style.borderLeftColor = '#C0C0C0';
+                rankColor = '#808080';
+                rankDiv.style.borderLeftColor = '#808080';
             } else if (index === 2) {
                 rankText = '🥉';
                 rankColor = '#CD7F32';
